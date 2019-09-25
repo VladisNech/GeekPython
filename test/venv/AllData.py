@@ -49,11 +49,9 @@ name, surname, age, weight = input('Введите ваше имя '), input('В
 
 if (age < 30) and (50 < weight < 120):
     print(name + ' ' + surname, ' ' + str(age) + ' год', ' вес - ' + str(weight), '- хорошее состояние', sep=', ')
-elif (age >= 30 and age < 40) and (50 >= weight or weight >= 120):
+elif (30 <= age < 40) and (50 >= weight or weight >= 120):
     print(name + ' ' + surname, ' ' + str(age) + ' год', ' вес - ' + str(weight), '- заняться собой', sep=', ')
 elif (age >= 40) and (50 >= weight or weight >= 120):
     print(name + ' ' + surname, ' ' + str(age) + ' год', ' вес - ' + str(weight), "- следует обратиться к врачу!", sep=', ')
 else:
     print(name + ' ' + surname, ' ' + str(age) + ' год', ' вес - ' + str(weight), "- мутант", sep=', ')
-
-
