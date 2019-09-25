@@ -55,3 +55,5 @@ elif (age >= 40) and (50 >= weight or weight >= 120):
     print(name + ' ' + surname, ' ' + str(age) + ' год', ' вес - ' + str(weight), "- следует обратиться к врачу!", sep=', ')
 else:
     print(name + ' ' + surname, ' ' + str(age) + ' год', ' вес - ' + str(weight), "- мутант", sep=', ')
+
+
