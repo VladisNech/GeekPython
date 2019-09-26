@@ -7,7 +7,8 @@ my_list_1 = [2, 5, 8, 2, 12, 12, 4]
 my_list_2 = [2, 7, 12, 3]
 """""
 
-list_1 = [2, 5, 8, 2, 12, 12, 4]
-list_2 = [2, 7, 12, 3]
-print(list_2)
-# какие-то изменения dgfs
+file = open('new_file.txt', 'r')
+lines = file.readlines()
+lines[4] = 'Питон' + '\n'
+file.close()
+file2 = open('new_file.txt', 'w')
