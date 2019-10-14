@@ -1,4 +1,4 @@
-# УРОК №1
+# УРОК №1 --------------------------------------------------------------------------------------------------------------
 """""
 Задание №1
 Запросите от пользователя число, сохраните в переменную, прибавьте к числу 2 и выведите результат на экран.
@@ -59,7 +59,7 @@ elif (age >= 40) and (50 >= weight or weight >= 120):
 else:
     print(name + ' ' + surname, ' ' + str(age) + ' год', ' вес - ' + str(weight), "- мутант", sep=', ')
 
-# Урок №2
+# Урок №2 -------------------------------------------------------------------------------------------------------------
 """""
 Задание №1
 Даны два произвольных списка. Удалите из первого списка элементы присутствующие во втором списке.
@@ -154,5 +154,109 @@ for number in my_list_1:
         result.append(number)
 print(result)
 
-# Урок №3
+# Урок №3 ------------------------------------------------------------------------------------------------------------
+
+# Игра угадай число
+
+# Версия 1
+import random
+number = random.randint(1, 100)
+print(number)
+
+user_number = int(input('Введите число - '))
+while user_number > number or user_number < number:
+    if user_number > number:
+        print('Загаданное число меньше')
+        user_number = int(input('Введите число - '))
+    elif user_number < number:
+        print('Загаданное число больше')
+        user_number = int(input('Введите число - '))
+else:
+    print('Верно')
+
+# Версия 2
+import random
+number = random.randint(1, 100)
+print(number)
+
+while True:
+    user_number = int(input('Введите число - '))
+    if user_number > number:
+        print('Загаданное число меньше')
+    elif user_number < number:
+        print('Загаданное число больше')
+    else:
+        print('Верно')
+        break
+
+# Версия 3
+import random
+number = random.randint(1, 100)
+# print(number)
+# задаем переменные и создаем список
+user_number = None
+count = 0
+levels = {1: 10, 2: 5, 3: 3}
+max_count = levels[int(input('Введите уровень сложности от 1 до 3 - '))]
+# Вводим пользователей
+user_count = int(input('Введите количество пользователей - '))
+users = []
+for i in range(user_count):
+    user_name = input(f'Введите имя пользователя {i + 1} - ')
+    users.append(user_name)
+
+is_winner = False
+winner_name = None
+# начинаем цикл
+while not is_winner:
+    # Считаем попытки
+    count += 1
+    if count > max_count:
+        print('Все пользователи проиграли')
+        break
+    # Логика подбора чисел
+    print(f'Попытка № {count}')
+    for number_enum, user in enumerate(users, 1):
+        print(f'Ход пользователя №{number_enum} {user}')
+        user_number = int(input('Введите число - '))
+        if user_number == number:
+            is_winner = True
+            winner_name = user
+            break
+        elif user_number > number:
+            print('Загаданное число меньше')
+        else:
+            print('Загаданное число больше')
+else:
+    print(f'Пользователь {winner_name} выиграл')
+
+"""""
+Задание №1
+В этой игре человек загадывает число, а компьютер пытается его угадать.
+В начале игры человек загадывает число от 1 до 100 в уме или записывает его на листок бумаги. 
+Компьютер начинает его отгадывать предлагая игроку варианты чисел. Если компьютер угадал число, игрок выбирает “победа”. 
+Если компьютер назвал число меньше загаданного, игрок должен выбрать “загаданное число больше”. 
+Если компьютер назвал число больше, игрок должен выбрать “загаданное число меньше”. 
+Игра продолжается до тех пор пока компьютер не отгадает число.
+Пример игры:
+Допустим, пользователь загадал число 42
+"""""
+
+import random
+
+min_number = 1
+max_number = 100
+user_mind = None
+
+while user_mind != '=':
+    number = random.randint(min_number, max_number)
+    print(number)
+    user_mind = input('Это число вы загадали? Введите подсказку - ')
+    if user_mind == '<':
+        max_number = number - 1
+    elif user_mind == '>':
+        min_number = number + 1
+print("Число угадано")
+
+# Урок №4 -------------------------------------------------------------------------------------------------------------
 
