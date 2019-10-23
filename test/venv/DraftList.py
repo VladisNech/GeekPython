@@ -19,3 +19,11 @@ sep = print_sep('-', 10)
 text = f'Hello {sep} fans {sep}'
 
 print(text)
+
+
+def get_person(**kwargs):
+    for k, v in kwargs.items():
+        print(k, v)
+
+
+get_person(name='Leo', age='20', car='yes')

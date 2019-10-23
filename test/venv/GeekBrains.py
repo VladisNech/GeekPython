@@ -1,12 +1,14 @@
-# Урок №4
+# Урок 4
 """""
 Задание №1
 """""
 
+a, b = int(input()), int(input())
+my_list = []
 
-def get_person(**kwargs):
-    for k, v in kwargs.items():
-        print(k, v)
+for i in range(a, b + 1):
+    if i % 3 == 0:
+        my_list.append(i)
+c = len(my_list)
 
-
-get_person(name='Leo', age='20', car='yes')
+print(sum(my_list) / int(c))

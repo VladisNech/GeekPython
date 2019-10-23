@@ -158,38 +158,6 @@ print(result)
 
 # Игра угадай число
 
-# Версия 1
-import random
-number = random.randint(1, 100)
-print(number)
-
-user_number = int(input('Введите число - '))
-while user_number > number or user_number < number:
-    if user_number > number:
-        print('Загаданное число меньше')
-        user_number = int(input('Введите число - '))
-    elif user_number < number:
-        print('Загаданное число больше')
-        user_number = int(input('Введите число - '))
-else:
-    print('Верно')
-
-# Версия 2
-import random
-number = random.randint(1, 100)
-print(number)
-
-while True:
-    user_number = int(input('Введите число - '))
-    if user_number > number:
-        print('Загаданное число меньше')
-    elif user_number < number:
-        print('Загаданное число больше')
-    else:
-        print('Верно')
-        break
-
-# Версия 3
 import random
 number = random.randint(1, 100)
 # print(number)
@@ -259,4 +227,3 @@ while user_mind != '=':
 print("Число угадано")
 
 # Урок №4 -------------------------------------------------------------------------------------------------------------
-
