@@ -1,14 +1,15 @@
 # Урок 4
 """""
 Задание №1
+Создайте функцию, принимающую на вход имя, возраст и город проживания человека.
+Функция должна возвращать строку вида «Василий, 21 год(а), проживает в городе Москва»
 """""
 
-a, b = int(input()), int(input())
-my_list = []
 
-for i in range(a, b + 1):
-    if i % 3 == 0:
-        my_list.append(i)
-c = len(my_list)
+def user(name, age, city):
+    result = f'{name}, {age} год(а), проживает в городе {city}'
+    return result
 
-print(sum(my_list) / int(c))
+
+print(user(name=input(), age=int(input()), city=input()))
+
