@@ -156,4 +156,44 @@ my_list = sorted(set(map(lambda number: number ** 2, my_list)))
 print(list(map(lambda number: str(number), my_list)))
 # -------------------------------------------------------------------------------------------------------------------
 
+# Импорт модулей и библиотек
+import math
+import random as rd
+from random import randint, random
+
+print(math.pi)
+
+print(math.cos(90))
+
+print(rd.randint(1, 10))
+
+print(randint)
+print(random)
+# -------------------------------------------------------------------------------------------------------------------
+
+import math
+
+r = 4
+
+# Найти длину окружномти
+print(round(2 * r * math.pi))
+
+# Найти площадь окружности
+print(r ** 2 * math.pi)
+print(math.pow(r, 2) * math.pi)
+
+# по координатам двух точек найти расстояние меж ними
+
+x1 = 100
+y1 = 200
+x2 = 50
+y2 = 150
+
+print(math.sqrt((x1 - x2) ** 2 + (y1 - y2) ** 2))
+
+# Найти факториал
+
+print(math.factorial(9))
+# -------------------------------------------------------------------------------------------------------------------
+
 

@@ -5,17 +5,17 @@ import tkinter as Tk
 from tkinter import filedialog
 
 
-def choose_file(files):
+def choose_file(my_file):
     count = int(input("Введите колличество файлов: "))
     for i in range(count):
-        root = Tk.Tk()
-        root.filename = filedialog.askopenfilename(filetypes=[("Excel file", "*.xlsx"), ("Excel file", "*.xls")])
-        root.destroy()
-        filename = root.filename
+        rooter = Tk.Tk()
+        rooter.filename = filedialog.askopenfilename(filetypes=[("Excel file", "*.xlsx"), ("Excel file", "*.xls")])
+        rooter.destroy()
+        filename = rooter.filename
         f = open(filename)
         f.close()
-        files.append(filename)
-    return (files)
+        my_file.append(filename)
+    return my_file
 
 
 excel_names = choose_file(files)
