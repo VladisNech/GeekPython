@@ -4,9 +4,31 @@
 
 """""
 
+import os
 import sys
 
-print(sys.platform)
+path = os.getcwd()
 
-for i in sys.path:
-    print(i)
+
+def ping():
+    print('pong')
+
+
+def hello(per_name):
+    print('Hello', per_name)
+
+
+def get_info():
+    print(os.listdir(path))
+
+
+param = sys.argv[1]
+
+if param == 'ping':
+    ping()
+elif param == 'list':
+    get_info()
+elif param == 'name':
+    name = sys.argv[2]
+    hello(name)
+
