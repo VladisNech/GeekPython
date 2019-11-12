@@ -332,3 +332,63 @@ print(enemy)
 attack(enemy, player)
 print(player)
 # Урок №5 -------------------------------------------------------------------------------------------------------------
+
+"""""
+Задание №1
+Создайте модуль (модуль - программа на Python, т.е. файл с расширением .py). 
+В нем создайте функцию создающую директории от dir_1 до dir_9 в папке из которой запущен данный код. 
+Затем создайте вторую функцию удаляющую эти папки. 
+Проверьте работу функций в этом же модуле.
+"""""
+
+import os
+
+
+def mkdir():
+    for i in range(1, 10):
+        name = 'dir'
+        new_path = os.path.join(os.getcwd(), '{}_{}'.format(name, i))
+        os.mkdir(new_path)
+
+
+"""""
+Задание №2
+Создайте модуль. В нем создайте функцию, которая принимает список и возвращает из него случайный элемент. 
+Если список пустой функция должна вернуть None. 
+Проверьте работу функций в этом же модуле.
+Примечание: Список для проверки введите вручную. Или возьмите этот: [1, 2, 3, 4]
+"""""
+
+import random
+
+
+def get_number_random_list():
+    my_list = []
+    for i in range(1, 10):
+        numbers = random.randint(1, 20)
+        my_list.append(numbers)
+    print(my_list)
+    if my_list is not None:
+        print(random.choice(my_list))
+    else:
+        print('None')
+
+
+"""""
+Задание №3
+Создайте модуль main.py. Из модулей реализованных в заданиях 1 и 2 сделайте импорт в main.py всех функций. 
+Вызовите каждую функцию в main.py и проверьте что все работает как надо.
+Примечание: 
+Попробуйте импортировать как весь модуль целиком (например из задачи 1), так и отдельные функции из модуля.
+"""""
+from GeekPython.Test.mkdir import *
+from GeekPython.Test.mkdir import mkdir
+from GeekPython.Test.random import get_number_random_list
+import GeekPython.Test.random as my_random
+
+mkdir()
+get_number_random_list()
+
+my_random.get_number_random_list()
+
+# Урок №6 -------------------------------------------------------------------------------------------------------------
