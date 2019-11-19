@@ -234,3 +234,52 @@ elif param == 'list':
 elif param == 'name':
     name = sys.argv[2]
     hello(name)
+# -------------------------------------------------------------------------------------------------------------------
+
+# работа с открытием и чтением файлов
+
+f = open('first.txt', 'w')
+
+f.write('Хай\n')
+f.write('мир\n')
+
+f.writelines(['hello\n', 'Python\n'])
+
+f = open('first.txt', 'r')
+
+# print(f.read())
+
+for line in f:
+    print(line.replace('\n', ''))
+
+# print(f.readlines())
+f.close()
+
+with open('first.txt', 'r') as f:
+    for line in f:
+        print(line.replace('\n', ''))
+print('end')
+# -------------------------------------------------------------------------------------------------------------------
+
+# работа с байтами, запись, кодирование и декодирование
+s = 'string'
+
+sb = b'byte'
+
+print(type(b), b, sep='\n')
+
+print(sb[2])
+print(sb[2:4])
+
+for item in sb:
+    print(item)
+
+s = 'hello world мир'
+
+sb = s.encode('utf-8')
+
+sb = sb.decode('utf-8')
+
+print(sb)
+# -------------------------------------------------------------------------------------------------------------------
+
