@@ -283,3 +283,60 @@ sb = sb.decode('utf-8')
 print(sb)
 # -------------------------------------------------------------------------------------------------------------------
 
+with open('bytes.txt', 'wb') as f:
+    f.write(b'Hello World')
+
+with open('bytes.txt', 'r', encoding='ascii') as f:
+    print(f.read())
+
+with open('bytes.txt', 'wb') as f:
+    my_str = 'Привет мир'
+    f.write(my_str.encode('utf-8'))
+
+with open('bytes.txt', 'r', encoding='utf-8') as f:
+    print(f.read())
+
+with open('bytes.txt', 'wb') as f:
+    my_str = 'Привет мир'
+    f.write(my_str.encode('utf-8'))
+
+with open('bytes.txt', 'rb') as f:
+    result = f.read()
+    print(result)
+    s = result.decode('utf-8')
+    print(s)
+# -------------------------------------------------------------------------------------------------------------------
+
+import pickle
+
+person = {'name': 'Vlad', 'Phones': [123, 456]}
+# пишем словарь через пикли
+with open('person.dat', 'wb') as f:
+    pickle.dump(person, f)
+print('Объект записан')
+
+# читаем словарь через пикли
+with open('person.dat', 'rb') as f:
+    pickle.load(f)
+print(person)
+# -------------------------------------------------------------------------------------------------------------------
+
+# пишем и читаем через json
+import json
+
+person = {'name': 'Vlad', 'age': '23', 'Phones': [123, 456]}, {'name': 'Leo', 'age': '24'}
+
+a = json.dumps(person)
+
+print(person)
+
+json.loads(a)
+
+print(a)
+
+with open('person.jon', 'w') as f:
+    a = json.dump(person, f)
+
+with open('person.jon', 'r') as f:
+    a = json.load(f)
+print(a)

@@ -392,3 +392,52 @@ get_number_random_list()
 my_random.get_number_random_list()
 
 # Урок №6 -------------------------------------------------------------------------------------------------------------
+
+"""""
+Задание №1
+1: Создать модуль music_serialize.py. 
+В этом модуле определить словарь для вашей любимой музыкальной группы, например:
+my_favourite_group = {
+‘name’: ‘Г.М.О.’,
+‘tracks’: [‘Последний месяц осени’, ‘Шапито’],
+‘Albums’: [{‘name’: ‘Делать панк-рок’,‘year’: 2016},
+{‘name’: ‘Шапито’,‘year’: 2014}]}
+
+С помощью модулей json и pickle сериализовать данный словарь в json и в байты, вывести результаты в терминал. 
+Записать результаты в файлы group.json, group.pickle соответственно. В файле group.json указать кодировку utf-8.
+"""""
+import pickle
+import json
+
+my_favourite_group = {
+    'name': 'Г.М.О.', 'tracks': ['Последний месяц осени', 'Шапито'],
+    'Albums': [{'name': 'Делать панк-рок', 'year': 2016}, {'name': 'Шапито', 'year': 2014}]}
+
+with open('group.pickle', 'wb') as f:
+    pickle.dump(my_favourite_group, f)
+print(f)
+
+with open('group.json', 'w', encoding='utf-8') as g:
+    json.dump(my_favourite_group, g)
+print(g)
+
+print('Объект записан')
+
+"""""
+Задание №2
+2: Создать модуль music_deserialize.py. 
+В этом модуле открыть файлы group.json и group.pickle, прочитать из них информацию. 
+И получить объект: словарь из предыдущего задания.
+"""""
+
+with open('group.pickle', 'rb') as r:
+    pickle.load(r)
+print(my_favourite_group)
+
+with open('group.json', 'r', encoding='utf-8') as q:
+    json.load(q)
+print(my_favourite_group)
+
+print('Получен словарь -', my_favourite_group)
+# Урок №7 -------------------------------------------------------------------------------------------------------------
+
