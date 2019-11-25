@@ -340,3 +340,102 @@ with open('person.jon', 'w') as f:
 with open('person.jon', 'r') as f:
     a = json.load(f)
 print(a)
+
+# -------------------------------------------------------------------------------------------------------------------
+
+# Тернарный оператор
+is_has_name = True
+
+name = "Max" if is_has_name else 'Empty'
+
+print(name)
+
+# -------------------------------------------------------------------------------------------------------------------
+# Обычный оператор
+word = "слово"
+
+result = []
+
+for i in range(len(word)):
+    if i % 2 != 0:
+        letter = word[i].lower()
+    else:
+        letter = word[i].upper()
+    result.append(letter)
+
+result = ''.join(result)
+
+print(result)
+
+# Тернальный оператор
+result = []
+
+for i in range(len(word)):
+    letter = word[i].lower() if i % 2 != 0 else word[i].upper()
+    result.append(letter)
+
+result = ''.join(result)  # Перевод списка в строку
+print(result)
+# -------------------------------------------------------------------------------------------------------------------
+
+# Generator of list
+import random
+
+my_list = []
+
+for i in range(1, 10):
+    numbers = random.randint(-30, 10)
+    my_list.append(numbers)
+print(my_list)
+
+result = []
+
+# realise through cycle FOR
+for i in my_list:
+    if i > 0:
+        result.append(i)
+print(result)
+
+# create through lambda function
+result = filter(lambda number: number > 0, my_list)
+print(list(result))
+
+# create though generator
+
+result = [number for number in my_list if number > 0]
+print(result)
+# -------------------------------------------------------------------------------------------------------------------
+# genegator of dict
+pairs = [(1, 'a'), (2, 'b'), (3, 'c')]
+
+result = {}
+# though cycle FOR
+for pair in pairs:
+    key = pair[0]
+    val = pair[1]
+    result[key] = val
+print(result)
+# through generator of dict
+result = {pair[0]: pair[1] for pair in pairs}
+print(result)
+# -------------------------------------------------------------------------------------------------------------------
+# make a list from 1 to 100 random numbers
+import random
+
+numbers = [random.randint(1, 100) for number in range(10)]
+print(numbers)
+
+# Создать список квадратных чисел
+numbers = [1, 2, 3, -4]
+
+numbers = [number ** 2 for number in numbers if number > 0]
+print(numbers)
+
+# Создать список имен на букву А
+
+names = ['Max', 'Alan', 'Kate', 'Bob', 'Andrey', 'John', 'Anna']
+
+names = [name for name in names if name[0] == 'A']
+names = [name for name in names if name.startswith('A')]  # Альтернативаная запись
+print(names)
+# -------------------------------------------------------------------------------------------------------------------
