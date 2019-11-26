@@ -439,3 +439,75 @@ names = [name for name in names if name[0] == 'A']
 names = [name for name in names if name.startswith('A')]  # Альтернативаная запись
 print(names)
 # -------------------------------------------------------------------------------------------------------------------
+
+s = 'asd'
+i = {'a': 'asd'}
+# через IF
+if len(s) != 0:
+    print('строка не пустая')
+else:
+    print('Строка пустая')
+# тернальный
+a = "string is not empty" if s else 'string is empty'
+print(a)
+
+# удобный способ, можно использовать логические выражения and и or
+if s and i:
+    print('строка не пустая')
+else:
+    print('Строка пустая')
+# -------------------------------------------------------------------------------------------------------------------
+import math
+import random
+
+numbers = [random.randint(-5, 5) for number in range(10)]
+print(numbers)
+
+result = []
+# обычный способ
+for number in numbers:
+    if number > 0:
+        sqrt = math.sqrt(number)
+        if sqrt < 2:
+            result.append(number)
+print(result)
+
+# Ленивый способ
+
+result = []
+
+for number in numbers:
+    if number > 0 and math.sqrt(number) < 2:
+        result.append(number)
+print(result)
+# Генератор
+result = [number for number in numbers if number > 0 and math.sqrt(number) < 2]
+
+print(result)
+
+
+# -------------------------------------------------------------------------------------------------------------------
+def add_to_list(input_list=None):  # обычный способ
+    if input_list is None:
+        input_list = []
+    input_list.append(2)
+    return input_list
+
+
+result = add_to_list([0, 1])
+print(result)
+result = add_to_list()
+print(result)
+
+
+def add_to_list(input_list=None):  # ленивый способ через or
+    input_list = input_list or []
+    input_list.append(2)
+    return input_list
+
+
+result = add_to_list([0, 1])
+print(result)
+result = add_to_list()
+print(result)
+# -------------------------------------------------------------------------------------------------------------------
