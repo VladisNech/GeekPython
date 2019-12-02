@@ -88,7 +88,7 @@ def mapping_different_columns(source_table,
 
 
 def getDataSourceFile():
-    MessageBox.Show("Выберите файл с ОСВ", "Загрузка данных", MessageBoxButtons.OK)
+    MessageBox.Show("Выберите файл для загрузки", "Загрузка данных", MessageBoxButtons.OK)
     dialog = OpenFileDialog()  # открывает окно выбора
     dialog.InitialDirectory = '%USERPROFILE%\\Documents'  # начальная директория окна выбора
     dialog.Filter = 'Comma-separated Values (*.csv)|*.csv;|Text (*.txt)|*.txt|All files (*.*)|*.*'  # тип файлов
@@ -111,7 +111,7 @@ def execute():
         status, table = Document.Data.Tables.TryGetValue(
             main_table)  # выясняет, добавлены ли уже у нас проводки текущего периода
         settings = TextDataReaderSettings()
-        settings.Separator = ","  # Настройка сепаратора
+        settings.Separator = "|"  # Настройка сепаратора
         settings.AddColumnNameRow(0)  # Указание на номер строки, в которой указанно имя
 
         datecol = [14, 15, 16]
@@ -129,8 +129,7 @@ def execute():
         ds = TextFileDataSource(fileloc, settings)
         ds.IsPromptingAllowed = True
         ds.ReuseSettingsWithoutPrompting = True
-        dt = Document.Data.Tables["new_table"]
-        dt2 = Document.Data.Tables["FAR"]  # пустая таблица с "шапкой"
+        dt = Document.Data.Tables["new_table"]  # пустая таблица с "шапкой"
         provider = dt.GetService(IServiceProvider)
 
         if status:
@@ -142,7 +141,6 @@ def execute():
 
         else:
             create_table(main_table, ds, dt)
-            dt2.AddRows(DataTableDataSource(new_table), settings)
         progress_service.CurrentProgress.CheckCancel()  # вывод служебного окна
 
     # обработка ошибок
@@ -163,7 +161,7 @@ def execute():
         MessageBox.Show("Загрузка файла завершена", "Загрузка данных", MessageBoxButtons.OK)
 
 
-dt2 = Document.Data.Tables["data"]
+dt2 = Document.Data.Tables["FAR"]
 rows_c = Document.ActiveFilteringSelectionReference.GetSelection(dt2).AsIndexSet()
 t_rows = rows_c.Count
 
@@ -178,6 +176,6 @@ if t_rows <= 0:
 elif t_rows > 0:
     dialogResult = MessageBox.Show("Данные уже загружены. Очистить данные?", "Ошибка импорта", MessageBoxButtons.YesNo)
 if (dialogResult == DialogResult.Yes):
-    dtTarget = Document.Data.Tables['data']
+    dtTarget = Document.Data.Tables['FAR']
     dtTarget.RemoveRows(RowSelection(IndexSet(dtTarget.RowCount, True)))
     MessageBox.Show("Данные успешно удалены.", "Очистка данных")
