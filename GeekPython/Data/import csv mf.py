@@ -1,4 +1,5 @@
 import clr
+
 clr.AddReference('System')
 clr.AddReference('System.Windows.Forms')
 from System import IServiceProvider, ArgumentException
@@ -26,48 +27,32 @@ def create_table(name, data_file, data_header):
 def mapping_different_columns(source_table,
                               target_table):  # функция мепит столбцы ( mapping уникален для каждого регистра (слева - столбцы из анализатора, справа - из регистра)
     mapping = {
-        "Номер актива": "Asset number",
-        "Описание актива": "Asset description",
-        "Местоположение": "Location",
-        "Право владения": "Tenure",
-        "Категория актива": "Asset category",
-        "Тип актива": "Asset type",
-        "Амортизирующийся актив": "Depreciating asset",
-        "Метод амортизации": "Depreciation method",
-        "Стоимость покупки": "Purchase cost",
-        "Ликвидационная стоимость": "Residual balance",
-        "Уменьшающийся остаток %": "Reducing balance %",
-        "Срок полезного использования (в годах)": "Useful life (years)",
-        "Оставшийся срок службы на начало периода": "Opening remaining life (years)",
-        "Оставшийся срок службы на конец периода": "Closing remaining life (years)",
-        "Дата оприходования": "Date capitalized",
-        "Дата выбытия": "Disposal date",
-        "Дата перемещения": "Transfer date",
-        "Стоимость ОС на начало периода": "Opening cost",
-        "Стоимость поступивших ОС": "Additions cost",
-        "Стоимость перемещенных ОС": "Transfers cost",
-        "Стоимость выбывших ОС": "Disposals cost",
-        "Стоимость ОС на конец периода": "Closing cost",
-        "Амортизация на начало периода": "Opening depreciation",
-        "Начисленная амортизация": "Depreciation charged",
-        "Амортизация при перемещении": "Depreciation transferred",
-        "Амортизация при выбытии": "Depreciation disposed",
-        "Амортизация на конец периода": "Closing depreciation",
-        "Остаточная стоимость на начало периода": "Opening NBV",
-        "Остаточная стоимость на конец периода": "Closing NBV",
-        "Остаточная стоимость выбывших ОС": "NBV of disposals",
-        "Остаточная стоимость перемещенных ОС": "NBV of transfers",
-        "Доход от реализации": "Proceeds",
-        "Прибыль от выбытия": "Profit on disposal",
-        "Поле, заданное пользователем 1": "User defined 1",
-        "Поле, заданное пользователем 2": "User defined 2",
-        "Поле, заданное пользователем 3": "User defined 3",
-        "Поле, заданное пользователем 4": "User defined 4",
-        "Поле, заданное пользователем 5": "User defined 5",
-        "Поле, заданное пользователем 6": "User defined 6",
-        "Поле, заданное пользователем 7": "User defined 7",
-        "Поле, заданное пользователем 8": "User defined 8",
-        "Корректировка амортизации ЭЯ": "EY depreciation override"
+        "Табельный номер сотрудника": "Employee number",
+        "Имя сотрудника": "Employee name",
+        "Дата приема на работу": "Joining date",
+        "Дата увольнения": "Leaving date",
+        "Дата рождения": "Date of birth",
+        "Адрес": "Address",
+        "City": "City",
+        "Country": "Country",
+        "Postcode": "Postcode",
+        "Идентификационный номер налогоплательщика": "Tax ID",
+        "Идентификатор банка": "Bank ID",
+        "Bank account number": "Bank account number",
+        "Должность": "Job title",
+        "Тип сотрудника": "Employee type",
+        "Подразделение": "Business unit",
+        "Location": "Location",
+        "Пол": "Gender",
+        "Employee pension contribution %": "Employee pension contribution %",
+        "Employer pension contribution %": "Employer pension contribution %",
+        "User defined MF1": "User defined MF1",
+        "User defined MF2": "User defined MF2",
+        "User defined MF3": "User defined MF3",
+        "User defined MF4": "User defined MF4",
+        "User defined MF5": "User defined MF5",
+        "User defined MF6": "User defined MF6",
+        "User defined MF7": "User defined MF7",
     }
     settings_mapping = dict()
     data_source = DataTableDataSource(source_table)
@@ -86,72 +71,74 @@ def mapping_different_columns(source_table,
     settings = AddRowsSettings(settings_mapping, ignoredColumns)
     return settings
 
-def getDataSourceFile1():
-    MessageBox.Show("Выберите файл со сравнительным периодом", "Загрузка данных", MessageBoxButtons.OK)
+
+def getDataSourceFile():
+    MessageBox.Show("Выберите файл для загрузки", "Загрузка данных", MessageBoxButtons.OK)
     dialog = OpenFileDialog()  # открывает окно выбора
     dialog.InitialDirectory = '%USERPROFILE%\\Documents'  # начальная директория окна выбора
     dialog.Filter = 'Comma-separated Values (*.csv)|*.csv;|Text (*.txt)|*.txt|All files (*.*)|*.*'  # тип файлов
     dialog.ShowDialog()
     return dialog.FileName
 
+
 def execute():
     try:
 
         progress_service.CurrentProgress.ExecuteSubtask('Opening file...')  # вывод служебного окна
         status, table = Document.Data.Tables.TryGetValue(
-            main_table)  # выясняет, добавлены ли уже у нас проводки текущего периода
+            main_table_mf)  # выясняет, добавлены ли уже у нас проводки текущего периода
         settings = TextDataReaderSettings()
         settings.Separator = "|"  # Настройка сепаратора
         settings.AddColumnNameRow(0)  # Указание на номер строки, в которой указанно имя
 
-        datecol = [14, 15, 16]
+        datecol = [2, 3, 4]
         for colnum in datecol:
             settings.SetDataType(colnum, DataType.Date)
 
-        realcol = [8, 9, 10, 11, 12, 13, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 41]
+        realcol = [17, 18]
         for colnum in realcol:
             settings.SetDataType(colnum, DataType.Real)
 
-        strcol = [0, 1, 2, 3, 4, 5, 6, 7, 33, 34, 35, 36, 37, 38, 39, 40]
+        strcol = [0, 1, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 19, 20, 21, 22, 23, 24, 25]
         for colnum in strcol:
             settings.SetDataType(colnum, DataType.String)
 
         ds = TextFileDataSource(fileloc, settings)
         ds.IsPromptingAllowed = True
         ds.ReuseSettingsWithoutPrompting = True
-        dt = Document.Data.Tables["new_table"]  # пустая таблица с "шапкой"
+        dt = Document.Data.Tables["table_mf"]  # пустая таблица с "шапкой"
         provider = dt.GetService(IServiceProvider)
 
         if status:
-            new_table = create_table(tempr_table, ds, dt)
+            table_mf = create_table(tempr_table_mf, ds, dt)
             # после обработки проводок прошлого периода, данные из временной таблицы переносятся в основную
-            settings = mapping_different_columns(new_table, table)
-            table.AddRows(DataTableDataSource(new_table), settings)
-            Document.Data.Tables.Remove(new_table)
+            settings = mapping_different_columns(table_mf, table)
+            table.AddRows(DataTableDataSource(table_mf), settings)
+            Document.Data.Tables.Remove(table_mf)
 
         else:
-            create_table(main_table, ds, dt)
+            create_table(main_table_mf, ds, dt)
         progress_service.CurrentProgress.CheckCancel()  # вывод служебного окна
 
     # обработка ошибок
     except (ArgumentException, PromptCanceledException, ProgressCanceledException):
         MessageBox.Show("Процедура импорта была прервана пользователем", "Ошибка импорта", MessageBoxButtons.OK)
-        Document.Data.Tables.Remove(tempr_table)
+        Document.Data.Tables.Remove(tempr_table_mf)
 
     except ImportException:
         MessageBox.Show("Во время импорта произошла ошибка", "Ошибка импорта", MessageBoxButtons.OK)
-        Document.Data.Tables.Remove(tempr_table)
+        Document.Data.Tables.Remove(tempr_table_mf)
 
     except:
         MessageBox.Show("Произошла непредвиденная ошибка, процедура импорта прервана", "Ошибка импорта",
                         MessageBoxButtons.OK)
-        Document.Data.Tables.Remove(tempr_table)
+        Document.Data.Tables.Remove(tempr_table_mf)
 
     else:
         MessageBox.Show("Загрузка файла завершена", "Загрузка данных", MessageBoxButtons.OK)
 
 
-dt2 = Document.Data.Tables["FAR"]
+dt2 = Document.Data.Tables['Employee Master File']
 rows_c = Document.ActiveFilteringSelectionReference.GetSelection(dt2).AsIndexSet()
 t_rows = rows_c.Count
 
@@ -166,6 +153,6 @@ if t_rows <= 0:
 elif t_rows > 0:
     dialogResult = MessageBox.Show("Данные уже загружены. Очистить данные?", "Ошибка импорта", MessageBoxButtons.YesNo)
 if (dialogResult == DialogResult.Yes):
-    dtTarget = Document.Data.Tables['FAR']
+    dtTarget = Document.Data.Tables['Employee Master File']
     dtTarget.RemoveRows(RowSelection(IndexSet(dtTarget.RowCount, True)))
     MessageBox.Show("Данные успешно удалены.", "Очистка данных")
