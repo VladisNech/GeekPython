@@ -49,7 +49,8 @@ def mapping_different_columns(source_table,
         "Критерий Пользователя ПД1": "User Defined PD1",
         "Критерий Пользователя ПД2": "User Defined PD2",
         "Критерий Пользователя ПД3": "User Defined PD3",
-        "Критерий Пользователя ПД4": "User Defined PD4"
+        "Критерий Пользователя ПД4": "User Defined PD4",
+        "Критерий Пользователя ПД5": "User Defined PD5"
     }
     settings_mapping = dict()
     data_source = DataTableDataSource(source_table)
