@@ -381,10 +381,10 @@ def get_number_random_list():
 Примечание: 
 Попробуйте импортировать как весь модуль целиком (например из задачи 1), так и отдельные функции из модуля.
 """""
-from GeekPython.Test.mkdir import *
-from GeekPython.Test.mkdir import mkdir
-from GeekPython.Test.random import get_number_random_list
-import GeekPython.Test.random as my_random
+from LowPython.Test.mkdir import *
+from LowPython.Test.mkdir import mkdir
+from LowPython.Test.random import get_number_random_list
+import LowPython.Test.random as my_random
 
 mkdir()
 get_number_random_list()
