@@ -69,3 +69,4 @@ if __name__ == '__main__':
     delete_all('new_folder')
     copy_file('new_folder', 'new_f')
     get_game()
+
