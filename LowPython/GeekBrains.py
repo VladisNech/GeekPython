@@ -56,7 +56,7 @@ def copy_file(name, new_name):
 
 # Встроенная игра
 def get_game():
-    from GeekPython.Data.game import game
+    from LowPython.Data.game import game
     game()
 
 
