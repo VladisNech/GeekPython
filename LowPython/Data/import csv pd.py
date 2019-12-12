@@ -50,7 +50,10 @@ def mapping_different_columns(source_table,
         "Критерий Пользователя ПД2": "User Defined PD2",
         "Критерий Пользователя ПД3": "User Defined PD3",
         "Критерий Пользователя ПД4": "User Defined PD4",
-        "Критерий Пользователя ПД5": "User Defined PD5"
+        "Критерий Пользователя ПД5": "User Defined PD5",
+        "Дата приема на работу": "Joining date",
+        "Дата увольнения": "Leaving date",
+        "Подразделение": "Business unit"
     }
     settings_mapping = dict()
     data_source = DataTableDataSource(source_table)
@@ -89,7 +92,7 @@ def execute():
         settings.Separator = "|"  # Настройка сепаратора
         settings.AddColumnNameRow(0)  # Указание на номер строки, в которой указанно имя
 
-        datecol = [1]
+        datecol = [1, 24, 25]
         for colnum in datecol:
             settings.SetDataType(colnum, DataType.Date)
 
@@ -97,7 +100,7 @@ def execute():
         for colnum in realcol:
             settings.SetDataType(colnum, DataType.Real)
 
-        strcol = [0, 2, 19, 20, 21, 22]
+        strcol = [0, 2, 19, 20, 21, 22, 23, 26]
         for colnum in strcol:
             settings.SetDataType(colnum, DataType.String)
 

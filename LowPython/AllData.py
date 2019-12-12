@@ -540,3 +540,146 @@ except ValueError:
 else:
     print(result)
 # Урок №8 -------------------------------------------------------------------------------------------------------------
+"""""
+Задание №1
+1. В консольный файловый менеджер добавить проверку ввода пользователя для всех функции с параметрами 
+(на уроке разбирали на примере одной функции).
+2. Добавить возможность изменения текущей рабочей директории.
+3. Добавить возможность развлечения в процессе работы с менеджером. 
+Для этого добавить в менеджер запуск одной из игр: “угадай число” или “угадай число (наоборот)”.
+"""""
+# Блок функций
+# Функиция для создания файла
+import os
+import shutil  # позволяет копировать папки и файлы
+import datetime
+
+
+# Функиция для создания файла
+def create_file(name, text=None):
+    with open(name, 'w', encoding='utf-8') as f:
+        if text:
+            f.write(text)
+
+
+# Функиция для создания папки
+def create_folder(name):
+    try:
+        os.mkdir(name)
+    except FileExistsError:
+        print('Файл уже создан')
+
+
+# Функиция для проверки данных в дериктории
+def get_list(folder_only=False):
+    result = os.listdir()
+    if folder_only:
+        result = [f for f in result if os.path.isdir(f)]
+    print(result)
+
+
+# Удаление папок и файлов
+def delete_all(name):
+    if os.path.isdir(name):
+        os.rmdir(name)
+    else:
+        os.remove(name)
+
+
+# копирование папок и файлов
+def copy_file(name, new_name):
+    if os.path.isdir(name):
+        try:
+            shutil.copytree(name, new_name)
+        except FileExistsError:
+            print('Копируемая папка уже существует')
+    else:
+        shutil.copy(name, new_name)
+
+
+def save_info(massage):
+    current_time = datetime.datetime.now()
+    result = f'{current_time} - {massage}'
+    with open('log.txt', 'a', encoding='utf-8') as f:
+        f.write(result + '\n')
+
+
+# Встроенная игра
+def get_game():
+    os.getcwd()
+    from Data.game import game
+    game()
+
+
+def change_dir(name):
+    os.chdir(name)
+    print(os.getcwd())
+
+
+# вызов других функций
+if __name__ == '__main__':
+    create_file('test.dat', 'some text')
+    create_folder('new_folder')
+    get_list()
+    get_list(True)
+    delete_all('new_folder')
+    copy_file('new_folder', 'new_f')
+    get_game()
+    save_info('abc')
+
+# блок вызова функций
+from GeekBrains import create_file, create_folder, get_list, delete_all, copy_file, save_info, get_game, change_dir
+import sys
+
+save_info('start')
+
+try:
+    command = sys.argv[1]
+except IndexError:
+    print('Используйте терминал')
+if command == 'list':
+    get_list()
+elif command == 'create_file':
+    try:
+        name = sys.argv[2]
+    except IndexError:
+        print('Введите название файла')
+    else:
+        create_file(name)
+elif command == 'create_folder':
+    try:
+        name = sys.argv[2]
+    except IndexError:
+        print('Введите название папки')
+    else:
+        create_folder(name)
+elif command == 'delete':
+    try:
+        name = sys.argv[2]
+    except IndexError:
+        print('Введите название удаляемого файла')
+    else:
+        delete_all(name)
+elif command == 'copy':
+    try:
+        name = sys.argv[2]
+        new_name = sys.argv[3]
+    except IndexError:
+        print('Введите название файла и новое название')
+    else:
+        copy_file(name, new_name)
+elif command == 'help':
+    print('Помощь')
+elif command == 'game':
+    get_game()
+
+elif command == 'ch':
+    try:
+        name = sys.argv[2]
+    except IndexError:
+        print('Введите название папки')
+    else:
+        change_dir(name)
+
+save_info('finish')
+# Урок №9 -------------------------------------------------------------------------------------------------------------
