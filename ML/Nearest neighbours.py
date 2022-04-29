@@ -1,9 +1,10 @@
 import numpy as np
+import random
 from scipy.spatial.distance import cdist
 
 
 def nearest_neighbours(data: list) -> dict:
-    dists = cdist(data, data)
+    dists = cdist(data, data).round(8)
     ids = np.argsort(dists)[:, 1]
     neighbours_dict = dict()
     for i in range(len(data)):
@@ -12,7 +13,7 @@ def nearest_neighbours(data: list) -> dict:
     return neighbours_dict
 
 
-# test
+# Тестирование на заданных значениях из примера
 resulting_dict = nearest_neighbours(
     data=[[1], [2], [5], [7], [100], [130]]
 )
@@ -35,4 +36,21 @@ data = [
 ]
 
 for key, value in nearest_neighbours(data).items():
+    print("{0}: {1}".format(key, value))
+print("")
+
+
+# Тестирование на сгенерированных произвольно значениях
+def random_list():
+    list = []
+    for j in range(10):
+        temp_list = []
+        for i in range(0, 5):
+            numbers = random.uniform(0, 10).__round__(2)
+            temp_list.append(numbers)
+        list.append(temp_list)
+    return list
+
+
+for key, value in nearest_neighbours(random_list()).items():
     print("{0}: {1}".format(key, value))
