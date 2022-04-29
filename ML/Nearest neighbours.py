@@ -1,5 +1,5 @@
 import numpy as np
-import random
+from random import uniform
 from scipy.spatial.distance import cdist
 
 
@@ -46,7 +46,7 @@ def random_list():
     for j in range(10):
         temp_list = []
         for i in range(0, 5):
-            numbers = random.uniform(0, 10).__round__(2)
+            numbers = uniform(0, 10).__round__(2)
             temp_list.append(numbers)
         list.append(temp_list)
     return list

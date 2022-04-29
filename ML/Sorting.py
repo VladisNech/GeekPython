@@ -1,4 +1,4 @@
-import random
+from random import randint
 
 
 def my_sort(input_list: list, ascending: bool = True):
@@ -23,7 +23,7 @@ print(my_sort(input_list, ascending=False))
 def random_list():
     list = []
     for i in range(1, 10):
-        numbers = random.randint(-100, 100)
+        numbers = randint(-100, 100)
         list.append(numbers)
     return list
 
