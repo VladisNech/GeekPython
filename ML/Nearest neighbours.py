@@ -43,9 +43,9 @@ print("")
 # Тестирование на сгенерированных произвольно значениях
 def random_list():
     list = []
-    for j in range(10):
+    for i in range(10):
         temp_list = []
-        for i in range(0, 5):
+        for j in range(0, 5):
             numbers = uniform(0, 10).__round__(2)
             temp_list.append(numbers)
         list.append(temp_list)
