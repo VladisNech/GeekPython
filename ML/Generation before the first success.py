@@ -1,5 +1,6 @@
 from random import uniform
 import numpy as np
+
 X = uniform(0, 1)
 n = 0
 Y_list = []
@@ -13,5 +14,5 @@ while True:
     if Y <= X / 2:
         continue
     else:
-        print("Mат. ожидание =", np.mean(Y_list))
+        print("Mат. ожидание (En) =", round(np.mean(Y_list), 2))
         break
