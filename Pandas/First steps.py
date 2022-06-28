@@ -19,7 +19,6 @@ print(df.loc['2012-Feb', 'Close'].mean())
 print(df.loc['2012-Feb':'2015-Feb', 'Close'].mean())
 print(df.resample('W')['Close'].mean())
 
-
 new_sample_df = df.loc['2012-Feb':'2017-Feb', ['Close']]
 new_sample_df.plot()
 plt.show()
