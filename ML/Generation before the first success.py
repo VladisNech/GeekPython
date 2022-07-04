@@ -4,6 +4,7 @@ import numpy as np
 X = uniform(0, 1)
 n = 0
 Y_list = []
+
 print("X / 2 =", X / 2)
 
 while True:
