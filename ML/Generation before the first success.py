@@ -14,5 +14,5 @@ while True:
     if Y <= X / 2:
         continue
     else:
-        print("Mат. ожидание (En) =", round(np.mean(Y_list), 2))
+        print("Mат. ожидание (En) =", np.mean(Y_list).round(2))
         break
